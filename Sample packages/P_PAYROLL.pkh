@@ -1,0 +1,16 @@
+create or replace PACKAGE P_PAYROLL AS 
+
+  PROCEDURE SetSalary(p_Employee_Id Employees.Employee_Id%type,
+                      p_Salary      Employees.Salary%type);
+
+  PROCEDURE SetSalaryAndCommission(p_Employee_Id    Employees.Employee_Id%type,
+                                   p_Salary         Employees.Salary%type,
+                                   p_Commission_Pct Employees.Commission_Pct%type);
+                      
+  PROCEDURE SetCommission(p_Employee_Id    Employees.Employee_Id%type,
+                          p_Commission_Pct Employees.Commission_Pct%type);
+                      
+                      
+  --EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID
+
+END P_PAYROLL;
