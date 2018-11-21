@@ -69,6 +69,14 @@ ORDER BY
     overload,
     position;
 
+-- You can use user_arguments to generate append parameter statements for logger
+SELECT q'[logger.append_param(loParams, ']' || argument_name || ''', ''' || argument_name || ''');', overload
+FROM   user_arguments a
+WHERE  package_name = upper('p_employees')
+AND    object_name = upper('AssignEmployeeToJob')
+AND    position > 0
+ORDER  BY overload nulls first, position;
+
 -- But - let's have a look at PL/Scopes structures
 -- First: Use the PLScope_compile-script to compile your objects
 
@@ -295,7 +303,7 @@ ORDER BY Object_Name, Object_Type, Name;
 
 
 
--- In our ETL package we refer columns - have any tables gotten added columns?
+-- In our ETL package we refer columns - have any tables gotten added columns since it was written?
 SELECT Name, Signature, Type, Object_Name, Usage_Id
 FROM User_Identifiers
 WHERE Object_Type = 'TABLE'
@@ -310,7 +318,7 @@ WHERE Usage = 'REFERENCE'
 AND Type = 'COLUMN';
 
 -- These columns are not reported as referenced anywhere:
--- however, rowtypes may be used!
+-- however, rowtypes may be used! - See p_Employees.AssignEmployeeToJob, line 74
 SELECT Name, Signature, Type, Object_Name, Usage_Id
 FROM User_Identifiers
 WHERE Object_Type = 'TABLE'
@@ -474,6 +482,7 @@ WHERE OBJECT_NAME = 'P_EMPLOYEES'
 AND NAME = 'MANAGERFORDEPARTMENT';
 
 -- Find queries in a package in v$sql
+-- Don't go flushing the cache on your production system - this is for demo
 ALTER SYSTEM FLUSH SHARED_POOL;
 
 BEGIN
@@ -599,7 +608,29 @@ WHERE OBJECT_NAME = 'P_EMPLOYEES'
 AND I.NAME = 'MANAGERFORDEPARTMENT'
 AND I.USAGE = 'CALL';
 
-
+-- Search for something in all_source
+-- and make it easy to jump to that part of the code with SQL Developer
+-- Not really PL/Scope, but still useful
+SELECT
+    s.owner,
+    s.name,
+    s.type,
+    s.line,
+    s.text,
+    s.owner   sdev_link_owner,
+    s.name    sdev_link_name,
+    s.type    sdev_link_type,
+    s.line    sdev_link_line
+FROM
+    all_source s
+WHERE
+    lower(s.text) LIKE '%<expression>%'
+    AND owner != '<OWNER>'
+ORDER BY
+    owner,
+    name,
+    type,
+    line;
 
 
 -- This set of queries are running slow. Need to add an index. Can it be unique?

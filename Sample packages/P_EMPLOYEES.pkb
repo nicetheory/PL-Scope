@@ -49,7 +49,7 @@ create or replace PACKAGE BODY P_EMPLOYEES AS
   END AddEmployee;
 
   PROCEDURE AssignEmployeeToDepartment(p_Employee_Id Employees.Employee_Id%type,
-                               p_Department_Id Employees.Department_Id%type) AS
+                                       p_Department_Id Employees.Department_Id%type) AS
     lnDepartmentManagerId Employees.Manager_Id%type;
   BEGIN
     lnDepartmentManagerId := ManagerForDepartment(p_Department_Id);
@@ -62,7 +62,7 @@ create or replace PACKAGE BODY P_EMPLOYEES AS
   END AssignEmployeeToDepartment;
 
   PROCEDURE AssignEmployeeToJob(p_Employee_Id Employees.Employee_Id%type,
-                      p_Job_Id Employees.Job_Id%type) AS
+                                p_Job_Id Employees.Job_Id%type) AS
     lrEmployee Employees%rowtype;
   BEGIN
     SELECT *
@@ -71,6 +71,7 @@ create or replace PACKAGE BODY P_EMPLOYEES AS
     WHERE Employee_id = p_Employee_Id;
     
     lrEmployee.Job_Id := p_Job_Id;
+    lrEmployee.Phone_Number := '123';
     
     -- Rowtypes are not tracked on column-level:
     UPDATE Employees
