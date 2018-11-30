@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<displays>
+<folder>
+	<name><![CDATA[Top SQL]]></name>
+	<tooltip><![CDATA[Top SQL]]></tooltip>
+	<description><![CDATA[ ]]></description>
+		<display id="621c8656-0165-1000-8002-7f0000015e7c" type="" style="Table" enable="true">
+		<name><![CDATA[Top SQL by Buffer Gets]]></name>
+		<description><![CDATA[Top SQL by Buffer Gets]]></description>
+		<tooltip><![CDATA[Top SQL by Buffer Gets]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
+	   buffer_gets "Buffer_Gets",
+	   (cpu_time / 1000000) "CPU_Seconds",
+	   disk_reads "Disk_Reads",
+	   executions "Executions",
+	   CASE
+		   WHEN rows_processed = 0 THEN
+			NULL
+		   ELSE
+			round((buffer_gets / nvl(REPLACE(rows_processed, 0, 1), 1)))
+	   END "Buffer_gets/rows_proc",
+	   round((buffer_gets / nvl(REPLACE(executions, 0, 1), 1))) "Buffer_gets/executions",
+	   (elapsed_time / 1000000) "Elapsed_Seconds",
+	   module "Module",
+       last_load_time,
+       first_load_time,
+	   sql_id
+FROM   gv$sql s
+ORDER  BY buffer_gets DESC NULLS LAST 
+FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
+			<binds>
+				<bind id="MAX_ROWS_TO_RETURN">
+					<prompt><![CDATA[MAX_ROWS_TO_RETURN]]></prompt>
+					<tooltip><![CDATA[MAX_ROWS_TO_RETURN]]></tooltip>
+					<value><![CDATA[NULL_VALUE]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+			</binds>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																																																																																								</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title></item>	</display>
+	<display id="c3b3735d-0165-1000-8001-7f000001fb89" type="" style="Table" enable="true">
+		<name><![CDATA[Top SQL by Executions]]></name>
+		<description><![CDATA[Top SQL by Executions]]></description>
+		<tooltip><![CDATA[Top SQL by Executions]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
+	   executions "Executions",
+	   (cpu_time / 1000000) "CPU_Seconds",
+	   disk_reads "Disk_Reads",
+	   buffer_gets "Buffer_Gets",
+	   CASE
+		   WHEN rows_processed = 0 THEN
+			NULL
+		   ELSE
+			round((buffer_gets / nvl(REPLACE(rows_processed, 0, 1), 1)))
+	   END "Buffer_gets/rows_proc",
+	   round((buffer_gets / nvl(REPLACE(executions, 0, 1), 1))) "Buffer_gets/executions",
+	   (elapsed_time / 1000000) "Elapsed_Seconds",
+	   module "Module",
+	   sql_id
+FROM   gv$sql s
+ORDER  BY executions DESC NULLS LAST
+FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
+			<binds>
+				<bind id="MAX_ROWS_TO_RETURN">
+					<prompt><![CDATA[MAX_ROWS_TO_RETURN]]></prompt>
+					<tooltip><![CDATA[MAX_ROWS_TO_RETURN]]></tooltip>
+					<value><![CDATA[NULL_VALUE]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+			</binds>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																																																																																			</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title></item>	</display>
+	<display id="c7aa81d2-0165-1000-8010-7f000001d73a" type="" style="Table" enable="true">
+		<name><![CDATA[Top SQL by Buffer Gets/Rows Proc]]></name>
+		<description><![CDATA[Top SQL by Buffer Gets/Rows Proc]]></description>
+		<tooltip><![CDATA[Top SQL by Buffer Gets/Rows Proc]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
+	   CASE
+		   WHEN rows_processed = 0 THEN
+			NULL
+		   ELSE
+			round((buffer_gets / nvl(REPLACE(rows_processed, 0, 1), 1)))
+	   END "Buffer_gets/rows_proc",
+	   round((cpu_time / 1000000), 3) "CPU_Seconds",
+	   disk_reads "Disk_Reads",
+	   buffer_gets "Buffer_Gets",
+	   executions "Executions",
+	   round((buffer_gets / nvl(REPLACE(executions, 0, 1), 1))) "Buffer_gets/executions",
+	   (elapsed_time / 1000000) "Elapsed_Seconds",
+	   module "Module",
+	   sql_id
+FROM   gv$sql s
+ORDER  BY (buffer_gets / nvl(REPLACE(rows_processed, 0, 1), 1)) DESC NULLS LAST
+FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
+			<binds>
+				<bind id="MAX_ROWS_TO_RETURN">
+					<prompt><![CDATA[MAX_ROWS_TO_RETURN]]></prompt>
+					<tooltip><![CDATA[MAX_ROWS_TO_RETURN]]></tooltip>
+					<value><![CDATA[NULL_VALUE]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+			</binds>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																																																																														</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title></item>	</display>
+	<display id="c7abb865-0165-1000-8012-7f000001d73a" type="" style="Table" enable="true">
+		<name><![CDATA[Top SQL by CPU]]></name>
+		<description><![CDATA[Top SQL by CPU]]></description>
+		<tooltip><![CDATA[Top SQL by CPU]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
+	   (cpu_time / 1000000) "CPU_Seconds",
+	   disk_reads "Disk_Reads",
+	   buffer_gets "Buffer_Gets",
+	   executions "Executions",
+	   CASE
+		   WHEN rows_processed = 0 THEN
+			NULL
+		   ELSE
+			round((buffer_gets / nvl(REPLACE(rows_processed, 0, 1), 1)))
+	   END "Buffer_gets/rows_proc",
+	   round((buffer_gets / nvl(REPLACE(executions, 0, 1), 1))) "Buffer_gets/executions",
+	   (elapsed_time / 1000000) "Elapsed_Seconds",
+	   module "Module",
+	   sql_id
+FROM   gv$sql s
+ORDER  BY cpu_time DESC NULLS LAST
+FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
+			<binds>
+				<bind id="MAX_ROWS_TO_RETURN">
+					<prompt><![CDATA[MAX_ROWS_TO_RETURN]]></prompt>
+					<tooltip><![CDATA[MAX_ROWS_TO_RETURN]]></tooltip>
+					<value><![CDATA[5]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+			</binds>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																																																																														</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title><sql><![CDATA[]]></sql><script language="js"><![CDATA[]]></script><help></help></item>	</display>
+	<display id="c7ac8cca-0165-1000-8014-7f000001d73a" type="" style="Table" enable="true">
+		<name><![CDATA[Top SQL by Disk Reads]]></name>
+		<description><![CDATA[Top SQL by Disk Reads]]></description>
+		<tooltip><![CDATA[Top SQL by Disk Reads]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
+	   disk_reads "Disk_Reads",
+	   (cpu_time / 1000000) "CPU_Seconds",
+	   buffer_gets "Buffer_Gets",
+	   executions "Executions",
+	   CASE
+		   WHEN rows_processed = 0 THEN
+			NULL
+		   ELSE
+			round((buffer_gets / nvl(REPLACE(rows_processed, 0, 1), 1)))
+	   END "Buffer_gets/rows_proc",
+	   round((buffer_gets / nvl(REPLACE(executions, 0, 1), 1))) "Buffer_gets/executions",
+	   (elapsed_time / 1000000) "Elapsed_Seconds",
+	   module "Module",
+	   sql_id
+FROM   gv$sql s
+ORDER  BY disk_reads DESC NULLS LAST
+FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
+			<binds>
+				<bind id="MAX_ROWS_TO_RETURN">
+					<prompt><![CDATA[MAX_ROWS_TO_RETURN]]></prompt>
+					<tooltip><![CDATA[MAX_ROWS_TO_RETURN]]></tooltip>
+					<value><![CDATA[NULL_VALUE]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+			</binds>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																																																																														</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title></item>	</display>
+	<display id="d249e7b2-0165-1000-8001-7f00000184bd" type="" style="Table" enable="true">
+		<name><![CDATA[Find a SQL by SQL_ID in source]]></name>
+		<description><![CDATA[]]></description>
+		<tooltip><![CDATA[]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[SELECT
+     st.type,
+     st.object_type,
+     st.owner,
+     st.object_name,
+     st.line,
+     st.text,
+     st.full_text,
+     st.owner         sdev_link_owner,
+     st.object_name   sdev_link_name,
+     st.object_type   sdev_link_type,
+     st.line          sdev_link_line
+ FROM
+     all_statements st
+ WHERE
+     st.sql_id =:SQL_ID]]></sql>
+			<binds>
+				<bind id="SQL_ID">
+					<prompt><![CDATA[SQL_ID]]></prompt>
+					<tooltip><![CDATA[SQL_ID]]></tooltip>
+					<value><![CDATA[0g3qc8x27dqqx]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+			</binds>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																																																																				</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+	</display>
+	<display id="d7e42781-0165-1000-8006-7f0000010d99" type="" style="Table" enable="true">
+		<name><![CDATA[Top SQL by Buffer Gets/Executions]]></name>
+		<description><![CDATA[Top SQL by Buffer Gets/Executions]]></description>
+		<tooltip><![CDATA[Top SQL by Buffer Gets/Executions]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
+	   round((buffer_gets / nvl(REPLACE(executions, 0, 1), 1))) "Buffer_gets/executions",
+	   round((cpu_time / 1000000), 3) "CPU_Seconds",
+	   disk_reads "Disk_Reads",
+	   buffer_gets "Buffer_Gets",
+	   executions "Executions",
+	   CASE
+		   WHEN rows_processed = 0 THEN
+			NULL
+		   ELSE
+			round((buffer_gets / nvl(REPLACE(rows_processed, 0, 1), 1)))
+	   END "Buffer_gets/rows_proc",
+	   (elapsed_time / 1000000) "Elapsed_Seconds",
+	   module "Module",
+	   sql_id
+FROM   gv$sql s
+ORDER  BY (buffer_gets / nvl(REPLACE(executions, 0, 1), 1)) DESC NULLS LAST
+FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
+			<binds>
+				<bind id="MAX_ROWS_TO_RETURN">
+					<prompt><![CDATA[MAX_ROWS_TO_RETURN]]></prompt>
+					<tooltip><![CDATA[MAX_ROWS_TO_RETURN]]></tooltip>
+					<value><![CDATA[NULL_VALUE]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+			</binds>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					null																																																																																																																		</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title></item>	</display>
+	<display id="d7f58feb-0165-1000-8009-7f0000010d99" type="" style="Table" enable="true">
+		<name><![CDATA[Top SQL in an object]]></name>
+		<description><![CDATA[Finds SQL-statements declared in a package and displays execution data for these from gv$sql]]></description>
+		<tooltip><![CDATA[]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[SELECT
+    st.type,
+    st.full_text,
+    --st.object_type,
+    --st.owner,
+    --st.object_name,
+    st.line,
+    executions "Executions",
+    px_servers_executions "PX_Execs",
+    round((buffer_gets / nvl(REPLACE(executions, 0, 1), 1))) "Buffer_gets/executions",
+    (cpu_time / 1000000) "CPU_Seconds",
+    disk_reads "Disk_Reads",
+    buffer_gets "Buffer_Gets",
+    CASE
+    WHEN rows_processed = 0 THEN
+        NULL
+    ELSE
+        round((buffer_gets / nvl(REPLACE(rows_processed, 0, 1), 1)))
+    END "Buffer_gets/rows_proc",
+    (elapsed_time / 1000000) "Elapsed_Seconds",
+    module "Module",
+    st.sql_id,
+    st.owner         sdev_link_owner,
+    st.object_name   sdev_link_name,
+    st.object_type   sdev_link_type,
+    st.line          sdev_link_line
+ FROM
+     all_statements st
+     LEFT JOIN gv$sql s ON st.sql_id = s.sql_id
+ WHERE
+     st.object_name like upper(:object_name)
+     AND st.owner LIKE NVL(:owner, user)
+     AND st.sql_id IS NOT NULL
+ ORDER BY
+     buffer_gets DESC NULLS LAST]]></sql>
+			<binds>
+				<bind id="object_name">
+					<prompt><![CDATA[object_name]]></prompt>
+					<tooltip><![CDATA[object_name]]></tooltip>
+					<value><![CDATA[p_employees]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+				<bind id="owner">
+					<prompt><![CDATA[owner]]></prompt>
+					<tooltip><![CDATA[owner]]></tooltip>
+					<value><![CDATA[%]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+			</binds>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																																																										</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="435c0e22-0166-1000-8002-7f000001e415" toolbar="false" ><title>Purge this cursor</title></item>	</display>
+	<display id="33f40d52-0166-1000-8003-7f000001f4d1" type="" style="Table" enable="true">
+		<name><![CDATA[Find a SQL by SQL_ID in GV$SQL]]></name>
+		<description><![CDATA[Find a specific SQL]]></description>
+		<tooltip><![CDATA[Find a specific SQL]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
+	   buffer_gets "Buffer_Gets",
+	   (cpu_time / 1000000) "CPU_Seconds",
+	   disk_reads "Disk_Reads",
+	   executions "Executions",
+	   CASE
+		   WHEN rows_processed = 0 THEN
+			NULL
+		   ELSE
+			round((buffer_gets / nvl(REPLACE(rows_processed, 0, 1), 1)))
+	   END "Buffer_gets/rows_proc",
+	   round((buffer_gets / nvl(REPLACE(executions, 0, 1), 1))) "Buffer_gets/executions",
+	   (elapsed_time / 1000000) "Elapsed_Seconds",
+	   module "Module",
+	   sql_id
+FROM   gv$sql s
+WHERE SQL_ID = :SQL_ID]]></sql>
+			<binds>
+				<bind id="SQL_ID">
+					<prompt><![CDATA[SQL_ID]]></prompt>
+					<tooltip><![CDATA[SQL_ID]]></tooltip>
+					<value><![CDATA[a7dgwnuzmzpxh]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+			</binds>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				
+				
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																																																																																																</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title><sql><![CDATA[]]></sql><script language="js"><![CDATA[]]></script><help></help></item>	</display>
+	<display id="435c0e22-0166-1000-8002-7f000001e415" type="" style="Script" enable="true">
+		<name><![CDATA[Purge a cursor from cache]]></name>
+		<description><![CDATA[]]></description>
+		<tooltip><![CDATA[]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[DECLARE
+	l_name     VARCHAR2(64);
+	l_sql_text CLOB;
+BEGIN
+	-- get address, hash_value and sql text
+	SELECT address || ',' || hash_value, sql_fulltext 
+    INTO l_name, l_sql_text 
+    FROM v$sqlarea 
+    WHERE sql_id = :SQL_ID;
+	-- not always does the job
+	SYS.DBMS_SHARED_POOL.PURGE(NAME => l_name, flag => 'C', heaps => 1);
+END;
+/]]></sql>
+			<binds>
+				<bind id="SQL_ID">
+					<prompt><![CDATA[SQL_ID]]></prompt>
+					<tooltip><![CDATA[SQL_ID]]></tooltip>
+					<value><![CDATA[NULL_VALUE]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+			</binds>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																		</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+	</display>
+</folder>
+</displays>
