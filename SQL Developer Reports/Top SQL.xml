@@ -14,6 +14,7 @@
 		</CustomValues>
 		<query>
 			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
+       nvl2(st.sql_id, 'YES', NULL) "Source",
 	   buffer_gets "Buffer_Gets",
 	   (cpu_time / 1000000) "CPU_Seconds",
 	   disk_reads "Disk_Reads",
@@ -29,8 +30,9 @@
 	   module "Module",
        last_load_time,
        first_load_time,
-	   sql_id
+	   st.sql_id
 FROM   gv$sql s
+LEFT JOIN all_statements st on (s.sql_id = st.sql_id)
 ORDER  BY buffer_gets DESC NULLS LAST 
 FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 			<binds>
@@ -84,7 +86,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 				</footer>
 				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
 			</pdf>
-<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title><sql><![CDATA[]]></sql><script language="js"><![CDATA[]]></script><help></help></item>	</display>
+<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title></item>	</display>
 	<display id="c3b3735d-0165-1000-8001-7f000001fb89" type="" style="Table" enable="true">
 		<name><![CDATA[Top SQL by Executions]]></name>
 		<description><![CDATA[Top SQL by Executions]]></description>
@@ -95,6 +97,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 		</CustomValues>
 		<query>
 			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
+       nvl2(st.sql_id, 'YES', NULL) "Source",
 	   executions "Executions",
 	   (cpu_time / 1000000) "CPU_Seconds",
 	   disk_reads "Disk_Reads",
@@ -108,8 +111,9 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 	   round((buffer_gets / nvl(REPLACE(executions, 0, 1), 1))) "Buffer_gets/executions",
 	   (elapsed_time / 1000000) "Elapsed_Seconds",
 	   module "Module",
-	   sql_id
+	   s.sql_id
 FROM   gv$sql s
+LEFT JOIN all_statements st on (s.sql_id = st.sql_id)
 ORDER  BY executions DESC NULLS LAST
 FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 			<binds>
@@ -162,7 +166,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 				</footer>
 				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
 			</pdf>
-<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title><sql><![CDATA[]]></sql><script language="js"><![CDATA[]]></script><help></help></item>	</display>
+<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title></item>	</display>
 	<display id="c7aa81d2-0165-1000-8010-7f000001d73a" type="" style="Table" enable="true">
 		<name><![CDATA[Top SQL by Buffer Gets/Rows Proc]]></name>
 		<description><![CDATA[Top SQL by Buffer Gets/Rows Proc]]></description>
@@ -173,6 +177,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 		</CustomValues>
 		<query>
 			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
+       nvl2(st.sql_id, 'YES', NULL) "Source",
 	   CASE
 		   WHEN rows_processed = 0 THEN
 			NULL
@@ -186,8 +191,9 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 	   round((buffer_gets / nvl(REPLACE(executions, 0, 1), 1))) "Buffer_gets/executions",
 	   (elapsed_time / 1000000) "Elapsed_Seconds",
 	   module "Module",
-	   sql_id
+	   st.sql_id
 FROM   gv$sql s
+LEFT JOIN all_statements st on (s.sql_id = st.sql_id)
 ORDER  BY (buffer_gets / nvl(REPLACE(rows_processed, 0, 1), 1)) DESC NULLS LAST
 FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 			<binds>
@@ -239,7 +245,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 				</footer>
 				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
 			</pdf>
-<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title><sql><![CDATA[]]></sql><script language="js"><![CDATA[]]></script><help></help></item>	</display>
+<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title></item>	</display>
 	<display id="c7abb865-0165-1000-8012-7f000001d73a" type="" style="Table" enable="true">
 		<name><![CDATA[Top SQL by CPU]]></name>
 		<description><![CDATA[Top SQL by CPU]]></description>
@@ -250,6 +256,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 		</CustomValues>
 		<query>
 			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
+       nvl2(st.sql_id, 'YES', NULL) "Source",
 	   (cpu_time / 1000000) "CPU_Seconds",
 	   disk_reads "Disk_Reads",
 	   buffer_gets "Buffer_Gets",
@@ -263,8 +270,9 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 	   round((buffer_gets / nvl(REPLACE(executions, 0, 1), 1))) "Buffer_gets/executions",
 	   (elapsed_time / 1000000) "Elapsed_Seconds",
 	   module "Module",
-	   sql_id
+	   st.sql_id
 FROM   gv$sql s
+LEFT JOIN all_statements st on (s.sql_id = st.sql_id)
 ORDER  BY cpu_time DESC NULLS LAST
 FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 			<binds>
@@ -327,6 +335,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 		</CustomValues>
 		<query>
 			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
+       nvl2(st.sql_id, 'YES', NULL) "Source",
 	   disk_reads "Disk_Reads",
 	   (cpu_time / 1000000) "CPU_Seconds",
 	   buffer_gets "Buffer_Gets",
@@ -340,8 +349,9 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 	   round((buffer_gets / nvl(REPLACE(executions, 0, 1), 1))) "Buffer_gets/executions",
 	   (elapsed_time / 1000000) "Elapsed_Seconds",
 	   module "Module",
-	   sql_id
+	   st.sql_id
 FROM   gv$sql s
+LEFT JOIN all_statements st on (s.sql_id = st.sql_id)
 ORDER  BY disk_reads DESC NULLS LAST
 FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 			<binds>
@@ -393,7 +403,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 				</footer>
 				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
 			</pdf>
-<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title><sql><![CDATA[]]></sql><script language="js"><![CDATA[]]></script><help></help></item>	</display>
+<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title></item>	</display>
 	<display id="d249e7b2-0165-1000-8001-7f00000184bd" type="" style="Table" enable="true">
 		<name><![CDATA[Find a SQL by SQL_ID in source]]></name>
 		<description><![CDATA[]]></description>
@@ -477,6 +487,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 		</CustomValues>
 		<query>
 			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
+       nvl2(st.sql_id, 'YES', NULL) "Source",
 	   round((buffer_gets / nvl(REPLACE(executions, 0, 1), 1))) "Buffer_gets/executions",
 	   round((cpu_time / 1000000), 3) "CPU_Seconds",
 	   disk_reads "Disk_Reads",
@@ -490,8 +501,9 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 	   END "Buffer_gets/rows_proc",
 	   (elapsed_time / 1000000) "Elapsed_Seconds",
 	   module "Module",
-	   sql_id
+	   st.sql_id
 FROM   gv$sql s
+LEFT JOIN all_statements st on (s.sql_id = st.sql_id)
 ORDER  BY (buffer_gets / nvl(REPLACE(executions, 0, 1), 1)) DESC NULLS LAST
 FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 			<binds>
@@ -544,7 +556,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 				</footer>
 				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
 			</pdf>
-<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title><sql><![CDATA[]]></sql><script language="js"><![CDATA[]]></script><help></help></item>	</display>
+<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title></item>	</display>
 	<display id="d7f58feb-0165-1000-8009-7f0000010d99" type="" style="Table" enable="true">
 		<name><![CDATA[Top SQL in an object]]></name>
 		<description><![CDATA[Finds SQL-statements declared in a package and displays execution data for these from gv$sql]]></description>
@@ -651,6 +663,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 		</CustomValues>
 		<query>
 			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
+       nvl2(st.sql_id, 'YES', NULL) "Source",
 	   buffer_gets "Buffer_Gets",
 	   (cpu_time / 1000000) "CPU_Seconds",
 	   disk_reads "Disk_Reads",
@@ -664,14 +677,15 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 	   round((buffer_gets / nvl(REPLACE(executions, 0, 1), 1))) "Buffer_gets/executions",
 	   (elapsed_time / 1000000) "Elapsed_Seconds",
 	   module "Module",
-	   sql_id
+	   st.sql_id
 FROM   gv$sql s
-WHERE SQL_ID = :SQL_ID]]></sql>
+LEFT JOIN all_statements st on (s.sql_id = st.sql_id)
+WHERE st.SQL_ID = :SQL_ID]]></sql>
 			<binds>
 				<bind id="SQL_ID">
 					<prompt><![CDATA[SQL_ID]]></prompt>
 					<tooltip><![CDATA[SQL_ID]]></tooltip>
-					<value><![CDATA[a7dgwnuzmzpxh]]></value>
+					<value><![CDATA[0g3qc8x27dqqx]]></value>
 					<bracket><![CDATA[null]]></bracket>
 				</bind>
 			</binds>
@@ -789,25 +803,27 @@ END;
 			<TYPE><![CDATA[horizontal]]></TYPE>
 		</CustomValues>
 		<query>
-			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
-       elapsed_time "Elapsed_Time",
-	   buffer_gets "Buffer_Gets",
-	   (cpu_time / 1000000) "CPU_Seconds",
-	   disk_reads "Disk_Reads",
-	   executions "Executions",
+			<sql><![CDATA[SELECT substr(s.sql_text, 1, 500) "SQL",
+       nvl2(st.sql_id, 'YES', NULL) "Source",
+	   (s.elapsed_time / 1000000) "Elapsed_Secs",
+       round(s.elapsed_time/greatest(nvl(s.executions, 1), 1)/1000000, 6) "Elapsed_secs_pr_exec",
+	   s.buffer_gets "Buffer_Gets",
+	   (s.cpu_time / 1000000) "CPU_Seconds",
+	   s.disk_reads "Disk_Reads",
+	   s.executions "Executions",
 	   CASE
 		   WHEN rows_processed = 0 THEN
 			NULL
 		   ELSE
-			round((buffer_gets / nvl(REPLACE(rows_processed, 0, 1), 1)))
+			round((s.buffer_gets / nvl(REPLACE(s.rows_processed, 0, 1), 1)))
 	   END "Buffer_gets/rows_proc",
-	   round((buffer_gets / nvl(REPLACE(executions, 0, 1), 1))) "Buffer_gets/executions",
-	   (elapsed_time / 1000000) "Elapsed_Seconds",
-	   module "Module",
-       last_load_time,
-       first_load_time,
-	   sql_id
+	   round((s.buffer_gets / nvl(REPLACE(s.executions, 0, 1), 1))) "Buffer_gets/executions",
+	   s.module "Module",
+       s.last_load_time,
+       s.first_load_time,
+	   s.sql_id
 FROM   gv$sql s
+LEFT JOIN all_statements st on (s.sql_id = st.sql_id)
 ORDER  BY elapsed_time DESC NULLS LAST 
 FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 			<binds>
