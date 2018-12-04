@@ -14,7 +14,7 @@
 		</CustomValues>
 		<query>
 			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
-       nvl2(st.sql_id, 'YES', NULL) "Source",
+       nvl2(st.sql_id, 'YES', NULL) "PLScope",
 	   buffer_gets "Buffer_Gets",
 	   (cpu_time / 1000000) "CPU_Seconds",
 	   disk_reads "Disk_Reads",
@@ -79,7 +79,8 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 					
 					
 					
-					null																																																																																																																													</data>
+					
+					null																																																																																																																																		</data>
 				</header>
 				<footer enable="false" generatedate="false">
 					<data value="null" />
@@ -97,7 +98,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 		</CustomValues>
 		<query>
 			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
-       nvl2(st.sql_id, 'YES', NULL) "Source",
+       nvl2(st.sql_id, 'YES', NULL) "PLScope",
 	   executions "Executions",
 	   (cpu_time / 1000000) "CPU_Seconds",
 	   disk_reads "Disk_Reads",
@@ -159,7 +160,8 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 					
 					
 					
-					null																																																																																																																								</data>
+					
+					null																																																																																																																													</data>
 				</header>
 				<footer enable="false" generatedate="false">
 					<data value="null" />
@@ -177,7 +179,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 		</CustomValues>
 		<query>
 			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
-       nvl2(st.sql_id, 'YES', NULL) "Source",
+       nvl2(st.sql_id, 'YES', NULL) "PLScope",
 	   CASE
 		   WHEN rows_processed = 0 THEN
 			NULL
@@ -238,7 +240,8 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 					
 					
 					
-					null																																																																																																																			</data>
+					
+					null																																																																																																																								</data>
 				</header>
 				<footer enable="false" generatedate="false">
 					<data value="null" />
@@ -256,7 +259,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 		</CustomValues>
 		<query>
 			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
-       nvl2(st.sql_id, 'YES', NULL) "Source",
+       nvl2(st.sql_id, 'YES', NULL) "PLScope",
 	   (cpu_time / 1000000) "CPU_Seconds",
 	   disk_reads "Disk_Reads",
 	   buffer_gets "Buffer_Gets",
@@ -317,7 +320,8 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 					
 					
 					
-					null																																																																																																																			</data>
+					
+					null																																																																																																																								</data>
 				</header>
 				<footer enable="false" generatedate="false">
 					<data value="null" />
@@ -335,7 +339,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 		</CustomValues>
 		<query>
 			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
-       nvl2(st.sql_id, 'YES', NULL) "Source",
+       nvl2(st.sql_id, 'YES', NULL) "PLScope",
 	   disk_reads "Disk_Reads",
 	   (cpu_time / 1000000) "CPU_Seconds",
 	   buffer_gets "Buffer_Gets",
@@ -396,7 +400,8 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 					
 					
 					
-					null																																																																																																																			</data>
+					
+					null																																																																																																																								</data>
 				</header>
 				<footer enable="false" generatedate="false">
 					<data value="null" />
@@ -469,7 +474,8 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 					
 					
 					
-					null																																																																																																									</data>
+					
+					null																																																																																																														</data>
 				</header>
 				<footer enable="false" generatedate="false">
 					<data value="null" />
@@ -487,7 +493,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 		</CustomValues>
 		<query>
 			<sql><![CDATA[SELECT substr(sql_text, 1, 500) "SQL",
-       nvl2(st.sql_id, 'YES', NULL) "Source",
+       nvl2(st.sql_id, 'YES', NULL) "PLScope",
 	   round((buffer_gets / nvl(REPLACE(executions, 0, 1), 1))) "Buffer_gets/executions",
 	   round((cpu_time / 1000000), 3) "CPU_Seconds",
 	   disk_reads "Disk_Reads",
@@ -545,11 +551,12 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 					
 					
 					
+					
 				
 					
 					
 					
-					null																																																																																																																							</data>
+					null																																																																																																																												</data>
 				</header>
 				<footer enable="false" generatedate="false">
 					<data value="null" />
@@ -645,14 +652,15 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 					
 					
 					
-					null																																																																																															</data>
+					
+					null																																																																																																				</data>
 				</header>
 				<footer enable="false" generatedate="false">
 					<data value="null" />
 				</footer>
 				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
 			</pdf>
-<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="435c0e22-0166-1000-8002-7f000001e415" toolbar="false" ><title>Purge this cursor</title><sql><![CDATA[]]></sql><script language="js"><![CDATA[]]></script><help></help></item>	</display>
+<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="435c0e22-0166-1000-8002-7f000001e415" toolbar="false" ><title>Purge this cursor</title></item>	</display>
 	<display id="33f40d52-0166-1000-8003-7f000001f4d1" type="" style="Table" enable="true">
 		<name><![CDATA[Find a SQL by SQL_ID in GV$SQL]]></name>
 		<description><![CDATA[Find a specific SQL]]></description>
@@ -713,6 +721,7 @@ WHERE st.SQL_ID = :SQL_ID]]></sql>
 					
 					
 					
+					
 				
 				
 					
@@ -727,14 +736,14 @@ WHERE st.SQL_ID = :SQL_ID]]></sql>
 					
 					
 					
-					null																																																																																																																																					</data>
+					null																																																																																																																																										</data>
 				</header>
 				<footer enable="false" generatedate="false">
 					<data value="null" />
 				</footer>
 				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
 			</pdf>
-<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title></item>	</display>
+<item  reload="false"  reloadparent="false" removeFromParent="false" className="oracle.dbtools.raptor.report.addin.DrillReportAction" classArgs="d249e7b2-0165-1000-8001-7f00000184bd" toolbar="false" ><title>Find statement in source</title><sql><![CDATA[]]></sql><script language="js"><![CDATA[]]></script><help></help></item>	</display>
 	<display id="435c0e22-0166-1000-8002-7f000001e415" type="" style="Script" enable="true">
 		<name><![CDATA[Purge a cursor from cache]]></name>
 		<description><![CDATA[]]></description>
@@ -786,7 +795,8 @@ END;
 					
 					
 					
-					null																																																							</data>
+					
+					null																																																												</data>
 				</header>
 				<footer enable="false" generatedate="false">
 					<data value="null" />
@@ -804,7 +814,7 @@ END;
 		</CustomValues>
 		<query>
 			<sql><![CDATA[SELECT substr(s.sql_text, 1, 500) "SQL",
-       nvl2(st.sql_id, 'YES', NULL) "Source",
+       nvl2(st.sql_id, 'YES', NULL) "PLScope",
 	   (s.elapsed_time / 1000000) "Elapsed_Secs",
        round(s.elapsed_time/greatest(nvl(s.executions, 1), 1)/1000000, 6) "Elapsed_secs_pr_exec",
 	   s.buffer_gets "Buffer_Gets",
@@ -847,6 +857,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 				<header enable="false" generatedate="false">
 					<data>
 					
+					
 				
 					
 					
@@ -871,7 +882,7 @@ FETCH FIRST NVL(:MAX_ROWS_TO_RETURN, 50) ROWS ONLY]]></sql>
 					
 					
 					
-					null																																																																																																																																	</data>
+					null																																																																																																																																						</data>
 				</header>
 				<footer enable="false" generatedate="false">
 					<data value="null" />
